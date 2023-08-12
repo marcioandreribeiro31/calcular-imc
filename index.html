@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>Exercicio de javascript calculando IMC</title>
+</head>
+
+<body>
+    <main>
+        <form id="form">
+            <div class="background">
+                <div class="center">
+                    <div class="section">
+                        <h1>Calcule seu IMC</h1>
+                        <label for="massa">Digite sua peso</label>
+                        <input type="number" id="massa" name="massa" required>
+                        <label class="altura" for="altura">Digite sua altura</label>
+                        <input type="number" id="altura" name="altura" required>
+                        <div class="button-center">
+                            <button class="button" onclick="calcularIMC()">Calcular</button>
+                            <button class="button" type="button" onclick="limparInput(), focar()">Limpar</button>
+                        </div>
+                        <span class="resultado" id="resultado">Resultado</span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <footer>
+        <p>Desenvolvido por <strong><a href="https://github.com/marcioandreribeiro31" target="_blank">Márcio André</a></strong></p>
+    </footer>
+
+    <script>
+
+        function calcularIMC() {
+            let massa = document.getElementById("massa").value;
+            let altura = document.getElementById("altura").value;
+            let resultado = massa / (altura * altura)
+            if (massa == "" || altura == "") {
+                alert("Necessário preencher os campos")
+            } else if (resultado < 16.9) {
+                document.getElementById("resultado").innerHTML = "Resultado é: " + arredondar(resultado) + "<br>" + "Muito abaixo do peso";
+            } else if (resultado >= 17 && resultado <= 18.49) {
+                document.getElementById("resultado").innerHTML = "Resultado é: " + arredondar(resultado) + "<br>" + " Abaixo do peso";
+            } else if (resultado >= 18.5 && resultado <= 24.99) {
+                document.getElementById("resultado").innerHTML = "Resultado é: " + arredondar(resultado) + "<br>" + " Peso normal";
+            } else if (resultado >= 25 && resultado <= 29.99) {
+                document.getElementById("resultado").innerHTML = "Resultado é: " + arredondar(resultado) + "<br>" + " Acima do peso";
+            } else if (resultado >= 30 && resultado <= 34.99) {
+                document.getElementById("resultado").innerHTML = "Resultado é: " + arredondar(resultado) + "<br>" + " Obsidade grau I";
+            } else if (resultado >= 35 && resultado <= 40) {
+                document.getElementById("resultado").innerHTML = "Resultado é: " + arredondar(resultado) + "<br>" + " Obsidade grau II";
+            } else
+                document.getElementById("resultado").innerHTML = "Resultado é: " + arredondar(resultado) + "<br>" + " Obsidade grau III";               
+        }
+
+        function arredondar(valor) {
+            return Math.round(valor * 100) / 100;
+        }
+        function limparInput(){
+            document.getElementById("form").reset();            
+        }
+        function focar(){
+            document.getElementById("massa").focus();
+        }
+    </script>
+</body>
+
+</html>
